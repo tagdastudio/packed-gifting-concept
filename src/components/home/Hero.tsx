@@ -145,7 +145,7 @@ export function Hero() {
     <section
       ref={root}
       aria-labelledby="hero-title"
-      className="relative -mt-[4.5rem] min-h-[100svh] overflow-hidden bg-bg-deep"
+      className="relative -mt-[4.5rem] min-h-[calc(100svh-var(--concept-h))] overflow-hidden bg-bg-deep"
     >
       <div className="absolute inset-0">
         <div data-hero-photo className="absolute inset-0">
@@ -204,7 +204,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-20 gutter page flex min-h-[100svh] flex-col justify-end pb-10 pt-[6.75rem] lg:justify-center lg:pb-16">
+      <div className="relative z-20 gutter page flex min-h-[calc(100svh-var(--concept-h))] flex-col justify-end pb-10 pt-[6.75rem] lg:justify-center lg:pb-16">
         <div data-hero-copy className="relative max-w-[37rem]">
           <div className="relative">
             <span data-ribbon aria-hidden="true" className="hero-ribbon" />

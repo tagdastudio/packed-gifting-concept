@@ -14,3 +14,5 @@ qa-server.log
 .impeccable/mocks
 
 preview/pages
+
+preview/production

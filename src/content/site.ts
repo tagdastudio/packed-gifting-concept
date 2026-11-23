@@ -39,7 +39,7 @@ export const site = {
   mapUrl: "https://www.google.com/maps?q=Mysuru",
   directionsLabel: "Open in Maps",
   delivery: "Local delivery in Mysuru. Courier across India on request.",
-  deliveryShort: "Mysuru delivery. India on request.",
+  deliveryShort: "Local delivery. India on request.",
   concept: true,
   themeColor: "#1b2a20",
   lang: "en",
