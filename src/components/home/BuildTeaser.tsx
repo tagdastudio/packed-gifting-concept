@@ -40,8 +40,8 @@ export function BuildTeaser() {
         <div className="lg:col-span-6 lg:col-start-7">
           <BuildDiagram className="w-full border border-line" />
           <p className="mt-3 text-[0.78rem] leading-relaxed text-fg/50">
-            The builder shows the slots, the price band and the note before anything is sent. We confirm stock, the final price
-            and delivery on WhatsApp.
+            The builder shows the slot tray, the price band and the note before anything is sent. We confirm stock, the final
+            price and delivery on WhatsApp.
           </p>
         </div>
       </div>

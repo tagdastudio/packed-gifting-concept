@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Arrow } from "@/components/ui/Arrow";
 import { ItemGlyph } from "@/components/hampers/HamperPlate";
+import { SlotTray } from "./SlotTray";
 import {
   buildBoxes,
   buildCategories,
@@ -232,15 +233,7 @@ export function HamperBuilder() {
                   {size.name} · {size.items} items
                 </p>
 
-                <div className="mt-4 flex gap-1.5">
-                  {Array.from({ length: max }).map((_, index) => (
-                    <span
-                      key={index}
-                      className={`h-2 flex-1 ${index < selected.length ? "bg-vermilion" : "bg-ink/15"}`}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
+                <SlotTray max={max} items={items} className="mt-4" />
 
                 {items.length ? (
                   <ul className="mt-4 grid gap-2 border-t border-line-ink pt-3">
