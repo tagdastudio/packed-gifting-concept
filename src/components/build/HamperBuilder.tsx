@@ -178,7 +178,7 @@ export function HamperBuilder() {
               </div>
             </div>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-[1fr_auto] sm:items-end">
+            <div className="mt-10 grid gap-5 sm:grid-cols-[1fr_auto] sm:items-start">
               <label className="block">
                 <span className="label text-ink-soft">3. Write the note</span>
                 <textarea
