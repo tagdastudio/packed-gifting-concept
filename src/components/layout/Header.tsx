@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { site } from "@/content/site";
 import { waLink } from "@/lib/links";
 import { Logo } from "@/components/ui/Logo";
@@ -6,8 +9,24 @@ import { NavLinks } from "./NavLinks";
 import { MobileMenu } from "./MobileMenu";
 
 export function Header() {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const overHero = pathname === "/" && !scrolled;
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-bg">
+    <header
+      data-over-hero={overHero ? "true" : "false"}
+      className={`sticky top-0 z-40 border-b transition-[background-color,border-color] duration-500 ${
+        overHero ? "border-transparent bg-transparent" : "border-line bg-bg"
+      }`}
+    >
       <div className="gutter page flex h-[4.5rem] items-center justify-between gap-6">
         <Logo />
 
@@ -20,7 +39,9 @@ export function Header() {
             href={waLink("Hi Packed, I'd like help with a gift.")}
             target="_blank"
             rel="noreferrer"
-            className="hidden min-h-11 items-center gap-2.5 border border-line px-4 text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-fg transition-colors duration-300 hover:border-fg sm:inline-flex"
+            className={`hidden min-h-11 items-center gap-2.5 border px-4 text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-fg transition-colors duration-300 sm:inline-flex ${
+              overHero ? "border-fg/35 hover:border-fg" : "border-line hover:border-fg"
+            }`}
           >
             WhatsApp
             <Arrow />

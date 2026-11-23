@@ -368,6 +368,229 @@
     margin-block: -0.1em -0.16em;
   }
 
+  /* Hero: a warm torch over a dark still life. The mask is moved by the pointer; the image inside is the same
+     photograph at full brightness. */
+  .hero-light {
+    --x: 68%;
+    --y: 42%;
+    --spot: 250px;
+    -webkit-mask-image: radial-gradient(
+      circle var(--spot) at var(--x) var(--y),
+      #000 0%,
+      rgb(0 0 0 / 0.94) 34%,
+      rgb(0 0 0 / 0.55) 58%,
+      transparent 76%
+    );
+    mask-image: radial-gradient(
+      circle var(--spot) at var(--x) var(--y),
+      #000 0%,
+      rgb(0 0 0 / 0.94) 34%,
+      rgb(0 0 0 / 0.55) 58%,
+      transparent 76%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  }
+
+  /* The headline is a stack of paper labels tied with a ribbon. */
+  .hero-strip {
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    border: 1px solid rgb(27 42 32 / 0.08);
+    border-radius: 2px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    padding: 0.1em 0.36em 0.2em;
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.3) inset,
+      0 26px 38px -30px rgb(0 0 0 / 0.85);
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4.85vw, 4.7rem);
+    font-weight: 500;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+  }
+
+  .hero-strip:first-child {
+    padding-left: 1.55rem;
+  }
+
+  .hero-strip:first-child::before {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.48rem;
+    width: 0.46rem;
+    height: 0.46rem;
+    border-radius: 999px;
+    background: var(--color-brass);
+    box-shadow:
+      0 0 0 1px rgb(27 42 32 / 0.28),
+      0 1px 0 rgb(255 255 255 / 0.55) inset;
+    content: "";
+  }
+
+  .hero-ribbon {
+    position: absolute;
+    z-index: 0;
+    top: -0.85rem;
+    bottom: -0.7rem;
+    left: 1.05rem;
+    width: 16px;
+    transform: rotate(-1.7deg);
+    clip-path: polygon(0 0, 100% 0, 100% 96.5%, 50% 100%, 0 96.5%);
+    background: linear-gradient(90deg, #d9553b 0%, var(--color-vermilion) 44%, #a83422 100%);
+    box-shadow:
+      0 16px 26px -18px rgb(0 0 0 / 0.8),
+      4px 0 0 rgb(142 42 26 / 0.42) inset;
+  }
+
+  .hero-slip {
+    position: relative;
+    width: fit-content;
+    max-width: 28rem;
+    transform: rotate(0.35deg);
+    border: 1px solid rgb(27 42 32 / 0.1);
+    border-radius: 1px;
+    background: var(--color-paper-2);
+    color: var(--color-ink);
+    padding: 0.82rem 1rem 0.78rem;
+    box-shadow: 0 20px 30px -26px rgb(0 0 0 / 0.85);
+  }
+
+  .hero-cta-tag {
+    position: relative;
+    display: inline-flex;
+    min-height: 3.3rem;
+    align-items: center;
+    gap: 0.7rem;
+    border-radius: 2px;
+    background: var(--color-vermilion);
+    padding: 0 1.25rem 0 2.4rem;
+    color: var(--color-paper);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    box-shadow: 0 22px 30px -24px rgb(0 0 0 / 0.9);
+    transition:
+      transform 0.35s var(--ease-out),
+      background-color 0.35s var(--ease-out);
+  }
+
+  .hero-cta-tag::before {
+    position: absolute;
+    top: 50%;
+    left: 1.05rem;
+    width: 0.62rem;
+    height: 0.62rem;
+    transform: translateY(-50%);
+    border-radius: 999px;
+    background: var(--color-bg-deep);
+    box-shadow:
+      0 0 0 1px rgb(244 234 216 / 0.3),
+      0 1px 2px rgb(0 0 0 / 0.4) inset;
+    content: "";
+  }
+
+  .hero-cta-tag:hover {
+    transform: translateY(-2px) rotate(-0.4deg);
+    background: var(--color-vermilion-deep);
+  }
+
+  .hero-stamp {
+    display: grid;
+    width: 4.7rem;
+    height: 4.7rem;
+    transform: rotate(-8deg);
+    place-items: center;
+    border: 1px solid rgb(244 234 216 / 0.34);
+    border-radius: 999px;
+    color: var(--color-fg);
+    text-align: center;
+    font-size: 0.54rem;
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  /* Tags pinned to the photograph. */
+  .photo-tag {
+    position: absolute;
+    z-index: 30;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    border: 0;
+    background: transparent;
+    color: inherit;
+  }
+
+  .photo-tag-pin {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: var(--color-brass);
+    box-shadow:
+      0 0 0 1px rgb(27 42 32 / 0.5),
+      0 0 0 4px rgb(244 234 216 / 0.16),
+      0 1px 0 rgb(255 255 255 / 0.6) inset;
+  }
+
+  .photo-tag-string {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 46px;
+    height: 1px;
+    transform: rotate(36deg);
+    transform-origin: left center;
+    background: linear-gradient(90deg, rgb(244 234 216 / 0.75), rgb(244 234 216 / 0.3));
+  }
+
+  .photo-tag-label {
+    position: absolute;
+    top: 30px;
+    left: 36px;
+    display: block;
+    transform: rotate(4deg);
+    border: 1px solid rgb(27 42 32 / 0.12);
+    border-radius: 1px;
+    background: var(--color-paper);
+    padding: 0.22rem 0.5rem;
+    color: var(--color-ink);
+    font-family: var(--font-hand);
+    font-size: 0.95rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    box-shadow: 0 12px 16px -14px rgb(0 0 0 / 0.9);
+    transition:
+      transform 0.3s var(--ease-out),
+      box-shadow 0.3s var(--ease-out);
+  }
+
+  .photo-tag:hover .photo-tag-label,
+  .photo-tag:focus-visible .photo-tag-label {
+    transform: translateY(-3px) rotate(2deg);
+    box-shadow: 0 18px 22px -16px rgb(0 0 0 / 0.9);
+  }
+
+  .photo-tag:focus-visible {
+    outline-offset: 8px;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-light {
+      --spot: 68vw;
+    }
+    .hero-strip {
+      font-size: clamp(2rem, 8.8vw, 3.1rem);
+    }
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
