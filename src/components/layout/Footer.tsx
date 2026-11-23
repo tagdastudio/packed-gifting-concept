@@ -97,9 +97,11 @@ export function Footer() {
                 <a href={`mailto:${site.email}`} className="link-line">
                   Email
                 </a>
-                <a href={site.phoneHref} className="link-line">
-                  Call
-                </a>
+                {site.concept ? null : (
+                  <a href={site.phoneHref} className="link-line">
+                    Call
+                  </a>
+                )}
                 <a href={site.instagramUrl} target="_blank" rel="noreferrer" className="link-line">
                   Instagram
                 </a>

@@ -1,8 +1,13 @@
 import { site } from "@/content/site";
 
-/** A prefilled WhatsApp message. The demo number is deliberately invalid; replace `site.whatsapp` for a client. */
+/**
+ * A prefilled WhatsApp message. On the concept, open WhatsApp's share sheet rather than a dead number; a client sets
+ * `site.concept` to false and `site.whatsapp` to the studio number.
+ */
 export function waLink(message: string) {
-  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
+  const text = encodeURIComponent(message);
+  if (site.concept) return `https://wa.me/?text=${text}`;
+  return `https://wa.me/${site.whatsapp}?text=${text}`;
 }
 
 export function mailLink(subject: string, body: string) {
