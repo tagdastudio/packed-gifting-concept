@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ConceptBanner } from "@/components/layout/ConceptBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/SkipLink";
@@ -21,6 +22,13 @@ export const metadata: Metadata = {
     title: site.title,
     description: site.description,
     locale: "en_IN",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, type: "image/jpeg" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.title,
+    description: site.description,
+    images: ["/og.jpg"],
   },
 };
 
@@ -33,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SkipLink />
         <RouteRefresh />
         <SmoothScroll anchorOffset={88}>
+          <ConceptBanner />
           <Header />
           {children}
           <Footer />

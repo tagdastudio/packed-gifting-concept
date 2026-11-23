@@ -9,6 +9,8 @@ type PageMeta = {
   path: string;
 };
 
+const SHARE_IMAGE = { url: "/og.jpg", width: 1200, height: 630, type: "image/jpeg" };
+
 /** Per-page metadata: canonical URL and a complete Open Graph block. */
 export function pageMetadata({ title, description, path }: PageMeta): Metadata {
   const ogTitle = typeof title === "string" ? `${title} · ${site.name}` : title.absolute;
@@ -23,7 +25,8 @@ export function pageMetadata({ title, description, path }: PageMeta): Metadata {
       url: path,
       title: ogTitle,
       description,
+      images: [SHARE_IMAGE],
     },
-    twitter: { card: "summary_large_image", title: ogTitle, description },
+    twitter: { card: "summary_large_image", title: ogTitle, description, images: [SHARE_IMAGE.url] },
   };
 }

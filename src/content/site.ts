@@ -17,6 +17,17 @@ export const site = {
     { day: "Monday to Saturday", time: "10:00 – 20:00" },
     { day: "Sunday", time: "11:00 – 17:00" },
   ],
+  /** Minutes from midnight, Asia/Kolkata. 0 is Sunday, matching Date#getDay. */
+  openHours: [
+    { day: 0, open: 11 * 60, close: 17 * 60 },
+    { day: 1, open: 10 * 60, close: 20 * 60 },
+    { day: 2, open: 10 * 60, close: 20 * 60 },
+    { day: 3, open: 10 * 60, close: 20 * 60 },
+    { day: 4, open: 10 * 60, close: 20 * 60 },
+    { day: 5, open: 10 * 60, close: 20 * 60 },
+    { day: 6, open: 10 * 60, close: 20 * 60 },
+  ],
+  timezone: "Asia/Kolkata",
   hoursNote: "Festive weeks run longer. Message before a late visit.",
   phone: "+91 00000 00000",
   phoneHref: "tel:+910000000000",

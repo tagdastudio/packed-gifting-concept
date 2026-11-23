@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { site } from "@/content/site";
 import { waLink } from "@/lib/links";
 import { Logo } from "@/components/ui/Logo";
 import { NavLinks } from "./NavLinks";

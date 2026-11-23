@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
 import { waLink } from "@/lib/links";
 import { ChestMark } from "@/components/ui/Logo";
-import { NavLinks } from "./NavLinks";
 
 export function MobileMenu() {
   const dialogRef = useRef<HTMLDialogElement>(null);
