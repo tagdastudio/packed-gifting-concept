@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
 import { waLink } from "@/lib/links";
-import { ChestMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 
 export function MobileMenu() {
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const closeTimer = useRef<number | null>(null);
   const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -24,11 +26,37 @@ export function MobileMenu() {
     if (dialog.open) dialog.close();
   }, [open]);
 
+  useEffect(
+    () => () => {
+      if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    },
+    [],
+  );
+
+  function openMenu() {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    setClosing(false);
+    setOpen(true);
+  }
+
+  function requestClose() {
+    if (!open || closing) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setClosing(true);
+    closeTimer.current = window.setTimeout(
+      () => {
+        setOpen(false);
+        setClosing(false);
+      },
+      reduced ? 0 : 240,
+    );
+  }
+
   return (
     <>
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={openMenu}
         aria-haspopup="dialog"
         aria-expanded={open}
         className="inline-flex min-h-11 items-center gap-2.5 border border-line px-3.5 text-[0.82rem] font-semibold uppercase tracking-[0.12em] text-fg transition-colors duration-300 hover:border-fg lg:hidden"
@@ -42,22 +70,32 @@ export function MobileMenu() {
 
       <dialog
         ref={dialogRef}
-        onClose={() => setOpen(false)}
-        onClick={(event) => {
-          if (event.target === event.currentTarget) setOpen(false);
+        onClose={() => {
+          setOpen(false);
+          setClosing(false);
         }}
+        onCancel={(event) => {
+          event.preventDefault();
+          requestClose();
+        }}
+        onClick={(event) => {
+          if (event.target === event.currentTarget) requestClose();
+        }}
+        data-closing={closing ? "true" : "false"}
         aria-label="Menu"
         className="fixed inset-0 m-0 h-[100svh] max-h-none w-full max-w-none border-0 bg-bg p-0 text-fg backdrop:bg-bg-deep"
       >
-        <div className="flex h-full flex-col">
+        <div className="menu-panel flex h-full flex-col">
           <div className="gutter flex h-[4.5rem] shrink-0 items-center justify-between border-b border-line">
-            <Link href="/" onClick={() => setOpen(false)} className="inline-flex items-center gap-2.5" aria-label={`${site.name} home`}>
-              <ChestMark size={24} />
-              <span className="font-display text-[1.3rem] font-semibold leading-none tracking-[-0.03em]">{site.wordmark}</span>
-            </Link>
+            <div
+              onClick={requestClose}
+              className="menu-logo inline-flex shrink-0 items-center border border-paper border-t-2 border-t-vermilion bg-paper px-3 py-2 text-ink shadow-[0_14px_24px_-18px_rgba(0,0,0,0.8)]"
+            >
+              <Logo className="text-ink" />
+            </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={requestClose}
               className="inline-flex min-h-11 items-center gap-2.5 border border-line px-3.5 text-[0.82rem] font-semibold uppercase tracking-[0.12em] transition-colors duration-300 hover:border-fg"
             >
               Close
@@ -74,8 +112,9 @@ export function MobileMenu() {
                 <li key={item.href} className="border-b border-line">
                   <Link
                     href={item.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-baseline justify-between gap-4 py-4 font-display text-[clamp(2rem,9vw,3.4rem)] leading-none tracking-[-0.025em] transition-colors duration-300 hover:text-saffron"
+                    onClick={requestClose}
+                    className="menu-link flex items-baseline justify-between gap-4 py-4 font-display text-[clamp(2rem,9vw,3.4rem)] leading-none tracking-[-0.025em] transition-colors duration-300 hover:text-saffron"
+                    style={{ animationDelay: `${0.12 + index * 0.055}s` }}
                   >
                     {item.label}
                     <span aria-hidden="true" className="label text-fg-soft">
@@ -93,7 +132,7 @@ export function MobileMenu() {
                 WhatsApp us
                 <Arrow />
               </a>
-              <Link href="/build" onClick={() => setOpen(false)} className="btn btn-outline">
+              <Link href="/build" onClick={requestClose} className="btn btn-outline">
                 Build a hamper
               </Link>
             </div>

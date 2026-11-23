@@ -125,6 +125,70 @@
   }
 }
 
+@keyframes menu-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes menu-panel-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes menu-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) rotate(-1deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes menu-link-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+dialog[open] .menu-panel {
+  animation: menu-panel-in 0.5s var(--ease-out) both;
+}
+
+dialog[data-closing="true"] .menu-panel {
+  animation: menu-panel-out 0.24s var(--ease-in-out) both;
+}
+
+dialog[open] .menu-logo {
+  animation: menu-logo-in 0.45s var(--ease-out) both;
+}
+
+dialog[open] .menu-link {
+  animation: menu-link-in 0.5s var(--ease-out) both;
+}
+
+dialog[data-closing="true"] .menu-link {
+  animation: none;
+}
+
 @layer components {
   .gutter {
     padding-inline: clamp(1.25rem, 4vw, 4rem);
