@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.env*
+!.env.example
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+qa-output
+qa-build.log
+qa-server.log
+
+.impeccable/review
+.impeccable/mocks
